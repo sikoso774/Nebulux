@@ -1,0 +1,85 @@
+name: Auto Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate manifest.json
+        run: |
+          python3 -c "
+          import json, sys, re
+
+          with open('manifest.json') as f:
+              data = json.load(f)
+
+          required = ['name', 'version', 'minAppVersion']
+          for key in required:
+              if key not in data:
+                  print(f'ERROR: missing field \"{key}\" in manifest.json')
+                  sys.exit(1)
+
+          if not re.match(r'^\d+\.\d+\.\d+$', data['version']):
+              print(f'ERROR: version \"{data[\"version\"]}\" is not a valid semver (expected X.Y.Z)')
+              sys.exit(1)
+
+          print(f'manifest.json is valid — version {data[\"version\"]}')
+          "
+
+      - name: Read version from manifest.json
+        id: version
+        run: |
+          VERSION=$(python3 -c "import json; print(json.load(open('manifest.json'))['version'])")
+          echo "value=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Check if tag already exists
+        id: tag_check
+        run: |
+          VERSION="${{ steps.version.outputs.value }}"
+          if git tag | grep -qx "$VERSION"; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "Tag $VERSION already exists — skipping release."
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "No tag found for $VERSION — a release will be created."
+          fi
+
+      - name: Extract changelog for this version
+        if: steps.tag_check.outputs.exists == 'false'
+        run: |
+          VERSION="${{ steps.version.outputs.value }}"
+          awk "/^## \[$VERSION\]/{found=1; next} found && /^## \[/{exit} found{print}" CHANGELOG.md \
+            | sed '/^[[:space:]]*$/d' > release_notes.md
+          if [ ! -s release_notes.md ]; then
+            echo "Release $VERSION" > release_notes.md
+          fi
+          echo "--- Release notes ---"
+          cat release_notes.md
+
+      - name: Create tag and GitHub Release
+        if: steps.tag_check.outputs.exists == 'false'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ steps.version.outputs.value }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag "$VERSION"
+          git push origin "$VERSION"
+          gh release create "$VERSION" \
+            --title "Nebulux $VERSION" \
+            --notes-file release_notes.md \
+            theme.css \
+            manifest.json
