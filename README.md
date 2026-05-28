@@ -65,11 +65,15 @@ You can swap the default callout icon on the fly by adding a keyword after a sla
 | :--- | :---: | :--- |
 | `idea` | 💡 | `> [!projects/idea]` |
 | `brain` | 🧠 | `> [!projects/brain]` |
-| `bug` | 🐞 | `> [!status/bug]` |
 | `target` | 🎯 | `> [!status/target]` |
 | `write` | ✍️ | `> [!nav/write]` |
 | `file` | 📂 | `> [!nav/file]` |
 | `heart` | ❤️ | `> [!projects/heart]` |
+| `code` | `< >` | `> [!nav/code]` |
+| `lock` | 🔒 | `> [!status/lock]` |
+| `link` | 🔗 | `> [!projects/link]` |
+
+*(All icons render as Lucide SVG — emoji above are visual references only. For the native Obsidian bug icon use `> [!bug]` directly.)*
 
 ### 🔲 Clean Mode
 If you want a minimalist block (just the frame and color) without any icon on the left. Useful if you put an emoji directly in the title.
@@ -78,7 +82,7 @@ If you want a minimalist block (just the frame and color) without any icon on th
 
 ### 💠 Native Mode
 
-If you want to use the default Obsidian vector icons (SVG) instead of the theme's emojis.
+If you want to use the default Obsidian vector icons instead of the theme's custom SVG icons.
 
 - **Syntax:** `> [!type/native]` (e.g., `> [!status/native]`)
 

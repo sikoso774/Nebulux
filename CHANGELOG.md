@@ -4,6 +4,52 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.1.6] - 2026-05-28 — Callout Icon Overhaul & Header Rendering Fixes
+
+A focused patch correcting icon rendering in callouts and gradient headers.
+
+### 🛠️ Fixed — Callout SVG Icons (mask-image compositing bug)
+
+`-webkit-background-clip: text` on H1–H6 headers was creating a compositing context in Electron/Chromium that silently broke `mask-image` on callout `::before` pseudo-elements, displaying a colored rectangle instead of the SVG icon.
+
+Added `isolation: isolate` to `body .callout` to create an independent compositing context and restore correct icon rendering.
+
+### 🎨 Changed — Callout icons: emoji → Lucide SVG data URIs
+
+All custom callout subtypes were using CSS string values (e.g. `"🧭"`) as `--hud-icon`. Since `mask-image` only accepts `url()` values, these were silently ignored.
+
+All icons have been replaced with Lucide SVG encoded as `url("data:image/svg+xml,...")`:
+
+| Subtype          | Icon          |
+| ---------------- | ------------- |
+| `nav`            | compass       |
+| `status`         | bar-chart     |
+| `projects`       | rocket        |
+| `/idea`          | lightbulb     |
+| `/brain`         | brain         |
+| `/target`        | target        |
+| `/write`         | pencil        |
+| `/file`          | folder        |
+| `/heart`         | heart         |
+| `/code` *(new)*  | code `< >`    |
+| `/lock` *(new)*  | lock          |
+| `/link` *(new)*  | link          |
+
+The `/bug` subtype has been removed — it duplicated the native `[!bug]` Obsidian callout which already has its own Lucide icon and is correctly colored by the theme.
+
+### 🎨 Fixed — Callout title color not following accent
+
+Added `--callout-color` to `nav`, `status`, and `projects` callout types. Obsidian uses this variable to color the callout title text (`.callout-title-inner`) — without it, titles were not inheriting the callout accent color.
+
+### 🛠️ Fixed — Emoji and Iconize icons in gradient headers
+
+`color: transparent` (used for `background-clip: text` gradients) was inherited by child elements, breaking two things:
+
+- **Emojis** (`.cm-emoji` spans) were clipped by the gradient instead of rendering normally. Fixed by resetting `background-clip` and `color` on `.cm-emoji` children.
+- **Iconize SVG icons** (`.cm-iconize-icon` / `.iconize-icon`) use `currentColor` internally — `color: transparent` made them invisible. Fixed by explicitly setting each header level's icon color to its gradient start color, in both editor mode and reading view.
+
+---
+
 ## [1.1.3] - 2026-05-27 — Font De-embedding (Size Reduction)
 
 Removed the 5 embedded Montserrat `@font-face` variants (400, 400i, 500, 600, 700) to bring `theme.css` under the Obsidian community size threshold.
