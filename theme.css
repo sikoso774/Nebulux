@@ -323,7 +323,8 @@ body .cm-header-3,
 body .cm-header-4,
 body .cm-header-5,
 body .cm-header-6 {
-    font-family: var(--font-headers, 'Orbitron', sans-serif);
+    font-family: var(--font-headers, 'Orbitron'), 'NebuluxEmoji', sans-serif;
+    font-variant-emoji: emoji;
     letter-spacing: 0.08em;
     /* Force background clip to text shape */
     -webkit-background-clip: text;
@@ -331,6 +332,35 @@ body .cm-header-6 {
     color: transparent;
     font-weight: 700;
 }
+
+/* Emoji in editor-mode gradient headers (cm-emoji spans) */
+body .cm-header-1 .cm-emoji,
+body .cm-header-2 .cm-emoji,
+body .cm-header-3 .cm-emoji,
+body .cm-header-4 .cm-emoji,
+body .cm-header-5 .cm-emoji,
+body .cm-header-6 .cm-emoji {
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    background-image: none;
+    color: var(--text-normal);
+}
+
+/* Fix: Iconize SVG icons in gradient headers — inherit color: transparent breaks currentColor */
+body .cm-header-1 .cm-iconize-icon { color: var(--h1-start); }
+body .cm-header-2 .cm-iconize-icon { color: var(--h2-start); }
+body .cm-header-3 .cm-iconize-icon { color: var(--h3-start); }
+body .cm-header-4 .cm-iconize-icon { color: var(--h4-start); }
+body .cm-header-5 .cm-iconize-icon { color: var(--h5-start); }
+body .cm-header-6 .cm-iconize-icon { color: var(--h6-start); }
+
+/* Same fix for reading view */
+body .markdown-rendered h1 .iconize-icon { color: var(--h1-start); }
+body .markdown-rendered h2 .iconize-icon { color: var(--h2-start); }
+body .markdown-rendered h3 .iconize-icon { color: var(--h3-start); }
+body .markdown-rendered h4 .iconize-icon { color: var(--h4-start); }
+body .markdown-rendered h5 .iconize-icon { color: var(--h5-start); }
+body .markdown-rendered h6 .iconize-icon { color: var(--h6-start); }
 
 /* 2. H1: Stellar Glow */
 body .markdown-rendered h1,
@@ -1158,5 +1188,3 @@ body .callout[data-callout^="status"] .callout-icon::before,
 body .callout[data-callout^="projects"] .callout-icon::before {
     display: block;
 }
-
-/* test bot */
