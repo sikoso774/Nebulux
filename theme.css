@@ -545,15 +545,22 @@ body .callout[data-callout$="/heart"] {
     --hud-icon: "❤️";
 }
 
-body .callout[data-callout$="/clean"] .callout-icon {
+body .callout[data-callout^="nav"][data-callout$="/clean"] .callout-icon,
+body .callout[data-callout^="status"][data-callout$="/clean"] .callout-icon,
+body .callout[data-callout^="projects"][data-callout$="/clean"] .callout-icon {
     display: none;
 }
 
-body .callout[data-callout$="/native"] .callout-icon::before {
+body .callout[data-callout^="nav"][data-callout$="/native"] .callout-icon::before,
+body .callout[data-callout^="status"][data-callout$="/native"] .callout-icon::before,
+body .callout[data-callout^="projects"][data-callout$="/native"] .callout-icon::before {
+    content: none;
     display: none;
 }
 
-body .callout[data-callout$="/native"] .callout-icon svg {
+body .callout[data-callout^="nav"][data-callout$="/native"] .callout-icon svg,
+body .callout[data-callout^="status"][data-callout$="/native"] .callout-icon svg,
+body .callout[data-callout^="projects"][data-callout$="/native"] .callout-icon svg {
     display: block;
 }
 
