@@ -4,6 +4,30 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.1.7] - 2026-05-29 — WCAG Contrast Compliance & Inline Title
+
+A targeted accessibility patch raising contrast ratios across the theme to meet WCAG AA/AAA standards, validated at 12.85:1 on the theme screenshot.
+
+### ♿ Fixed — Header gradient end color (WCAG AA)
+
+`--h1-end` was `rgba(255,255,255,0.4)`, compositing to ~4.07:1 against the dark background — just under the WCAG AA threshold of 4.5:1. Raised to `rgba(255,255,255,0.7)` for a ratio of ~8.4:1.
+
+Updated the Style Settings `@settings` default from `#999999` to `#b5c0d0` to match the visual equivalent.
+
+### ♿ Fixed — Graph view line contrast (WCAG 1.4.11 non-text)
+
+`.graph-view.color-line` was `rgba(255,255,255,0.15)` → ratio ~1.16:1 against the graph background, failing the 3:1 non-text minimum. Raised to `rgba(255,255,255,0.35)` → ~3:1.
+
+### 🎨 Added — Inline title styling
+
+The note filename (`.inline-title`) was rendering in the nav blue (`#78B4FF`) — same color as H2, creating a visual hierarchy inversion. Added an explicit rule setting it to Orbitron font, white `#ffffff`, `letter-spacing: 0.08em` — consistent with other headers and ~20:1 contrast.
+
+### 🖼️ Updated — Theme screenshot
+
+Replaced the old HUD dashboard screenshot with a typography showcase displaying H1–H6, callouts, and body text. WCAG result: **12.85:1 — AA Pass + AAA Pass**.
+
+---
+
 ## [1.1.6] - 2026-05-28 — Callout Icon Overhaul & Header Rendering Fixes
 
 A focused patch correcting icon rendering in callouts and gradient headers.
