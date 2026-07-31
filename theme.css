@@ -1329,6 +1329,7 @@ body .callout[data-callout^="status"] .callout-title-inner,
 body .callout[data-callout^="projects"] .callout-title-inner {
   margin: 0;
   transform: translateY(1px);
+  color: rgb(var(--callout-color));
 }
 
 body .callout[data-callout^="nav"] .callout-icon::before,
