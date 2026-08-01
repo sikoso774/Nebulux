@@ -480,11 +480,11 @@ body .workspace-tab-header.is-active,
 body .vertical-tab-nav-item.is-active {
   background-color: #0f192d;
   opacity: 1;
-  color: rgb(var(--color-nav));
-  border: 1px solid rgba(var(--color-nav), 0.5);
+  color: var(--color-nav);
+  border: 1px solid color-mix(in srgb, var(--color-nav) 50%, transparent);
   box-shadow:
-    inset 0 2px 0 0 rgb(var(--color-nav)),
-    0 0 10px rgba(var(--color-nav), 0.2);
+    inset 0 2px 0 0 var(--color-nav),
+    0 0 10px color-mix(in srgb, var(--color-nav) 20%, transparent);
 }
 
 body .workspace-tab-header-container,
@@ -494,28 +494,28 @@ body .vertical-tab-header {
 
 body .app-container .titlebar {
   background: #000000;
-  border-bottom: var(--hud-frame) solid rgba(var(--color-nav), 0.8);
-  box-shadow: 0 2px 10px rgba(var(--color-nav), 0.25);
+  border-bottom: var(--hud-frame) solid color-mix(in srgb, var(--color-nav) 80%, transparent);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--color-nav) 25%, transparent);
 }
 
 body .app-container .status-bar {
   background: #000000;
-  border-top: var(--hud-frame) solid rgba(var(--color-nav), 0.5);
+  border-top: var(--hud-frame) solid color-mix(in srgb, var(--color-nav) 50%, transparent);
 }
 
 body button:not(.excalidraw-wrapper *):not(.canvas-wrapper *),
 body button.mod-cta:not(.excalidraw-wrapper *):not(.canvas-wrapper *) {
   background-color: rgba(15, 25, 45, 0.9);
-  border: 1px solid rgba(var(--color-nav), 0.5);
+  border: 1px solid color-mix(in srgb, var(--color-nav) 50%, transparent);
   color: #e0e6ed;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease;
 }
 
 body button:not(.excalidraw-wrapper *):not(.canvas-wrapper *):hover {
-  background-color: rgba(var(--color-nav), 0.15);
-  box-shadow: 0 0 15px rgba(var(--color-nav), 0.6);
-  border-color: rgb(var(--color-nav));
+  background-color: color-mix(in srgb, var(--color-nav) 15%, transparent);
+  box-shadow: 0 0 15px color-mix(in srgb, var(--color-nav) 60%, transparent);
+  border-color: var(--color-nav);
   transform: translateY(-2px);
   color: #ffffff;
 }
@@ -525,7 +525,7 @@ body .suggestion-container {
   background-color: #0f192d;
   box-shadow:
     0 10px 30px rgba(0, 0, 0, 0.9),
-    inset 0 0 0 1px rgba(var(--color-nav), 0.4);
+    inset 0 0 0 1px color-mix(in srgb, var(--color-nav) 40%, transparent);
   border: none;
   padding: 4px;
 }
@@ -540,9 +540,9 @@ body .suggestion-item {
 body .menu-item.is-selected,
 body .suggestion-item.is-selected,
 body .menu-item:hover {
-  background-color: rgba(var(--color-nav), 0.2);
-  color: rgb(var(--color-nav));
-  box-shadow: inset 3px 0 0 rgb(var(--color-nav));
+  background-color: color-mix(in srgb, var(--color-nav) 20%, transparent);
+  color: var(--color-nav);
+  box-shadow: inset 3px 0 0 var(--color-nav);
 }
 
 /* =================================================================
@@ -765,7 +765,7 @@ body .callout[data-callout="nav/menu"] .callout-content li {
   flex: 1 1 auto;
   min-width: 120px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(var(--color-nav), 0.3);
+  border: 1px solid color-mix(in srgb, var(--color-nav) 30%, transparent);
   border-radius: 10px;
   text-align: center;
   transition: all 0.3s ease;
@@ -773,11 +773,11 @@ body .callout[data-callout="nav/menu"] .callout-content li {
 }
 
 body .callout[data-callout="nav/menu"] .callout-content li:hover {
-  background: rgba(var(--color-nav), 0.25);
-  border-color: rgb(var(--color-nav));
+  background: color-mix(in srgb, var(--color-nav) 25%, transparent);
+  border-color: var(--color-nav);
   box-shadow:
-    0 0 20px rgba(var(--color-nav), 0.6),
-    inset 0 0 10px rgba(var(--color-nav), 0.3);
+    0 0 20px color-mix(in srgb, var(--color-nav) 60%, transparent),
+    inset 0 0 10px color-mix(in srgb, var(--color-nav) 30%, transparent);
   transform: translateY(-3px);
 }
 
@@ -794,8 +794,8 @@ body .callout[data-callout="nav/menu"] .callout-content a {
 body .callout[data-callout="nav/menu"] .callout-content li:hover a {
   color: #ffffff;
   text-shadow:
-    0 0 12px rgb(var(--color-nav)),
-    0 0 20px rgb(var(--color-nav));
+    0 0 12px var(--color-nav),
+    0 0 20px var(--color-nav);
 }
 
 body .callout[data-callout="nav/menu"] .callout-content li::marker {
@@ -855,15 +855,15 @@ body .dashboard .callout[data-callout="nav"] .callout-content li {
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(var(--color-nav), 0.3);
+  border: 1px solid color-mix(in srgb, var(--color-nav) 30%, transparent);
   border-radius: 8px;
   transition: 0.2s;
 }
 
 body .dashboard .callout[data-callout="nav"] .callout-content li:hover {
-  background: rgba(var(--color-nav), 0.2);
-  border-color: rgb(var(--color-nav));
-  box-shadow: 0 0 10px rgba(var(--color-nav), 0.4);
+  background: color-mix(in srgb, var(--color-nav) 20%, transparent);
+  border-color: var(--color-nav);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--color-nav) 40%, transparent);
   transform: translateY(-2px);
 }
 
@@ -877,25 +877,25 @@ body ::-webkit-scrollbar {
 }
 
 body ::-webkit-scrollbar-thumb {
-  background-color: rgba(var(--color-nav), 0.2);
-  border: 1px solid rgba(var(--color-nav), 0.3);
+  background-color: color-mix(in srgb, var(--color-nav) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-nav) 30%, transparent);
   border-radius: 4px;
 }
 
 body ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(var(--color-nav), 0.6);
-  box-shadow: 0 0 10px rgba(var(--color-nav), 0.5);
+  background-color: color-mix(in srgb, var(--color-nav) 60%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--color-nav) 50%, transparent);
 }
 
 body .modal input[type="range"]::-webkit-slider-thumb {
-  background: rgb(var(--color-nav));
-  box-shadow: 0 0 10px rgb(var(--color-nav));
+  background: var(--color-nav);
+  box-shadow: 0 0 10px var(--color-nav);
 }
 
 body .tag,
 body .metadata-property .multi-select-pill {
-  background-color: rgba(var(--color-nav), 0.15);
-  color: rgb(var(--color-nav));
+  background-color: color-mix(in srgb, var(--color-nav) 15%, transparent);
+  color: var(--color-nav);
   border: none;
 }
 
@@ -905,23 +905,23 @@ body .multi-select-pill-remove-button {
 
 /* Toggles Settings */
 body .checkbox-container.is-enabled {
-  background-color: rgba(var(--color-nav), 0.3);
+  background-color: color-mix(in srgb, var(--color-nav) 30%, transparent);
   box-shadow:
-    0 0 10px rgba(var(--color-nav), 0.4),
-    inset 0 0 5px rgba(var(--color-nav), 0.5);
-  border: 1px solid rgb(var(--color-nav));
+    0 0 10px color-mix(in srgb, var(--color-nav) 40%, transparent),
+    inset 0 0 5px color-mix(in srgb, var(--color-nav) 50%, transparent);
+  border: 1px solid var(--color-nav);
 }
 
 body .checkbox-container.is-enabled:after {
   background-color: #ffffff;
   box-shadow:
-    0 0 15px rgb(var(--color-nav)),
-    0 0 8px rgb(var(--color-nav));
+    0 0 15px var(--color-nav),
+    0 0 8px var(--color-nav);
 }
 
 body .checkbox-container:hover {
-  border-color: rgb(var(--color-nav));
-  box-shadow: 0 0 12px rgba(var(--color-nav), 0.6);
+  border-color: var(--color-nav);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--color-nav) 60%, transparent);
 }
 
 /* 🌟 Unified Checkboxes Fix (Reading & Editor) */
@@ -932,7 +932,7 @@ body .markdown-rendered .task-list-item-checkbox {
   width: 18px;
   height: 18px;
   border-radius: 4px;
-  border: 2px solid rgba(var(--color-nav), 0.5);
+  border: 2px solid color-mix(in srgb, var(--color-nav) 50%, transparent);
   background-color: rgba(0, 0, 0, 0.4);
   cursor: pointer;
   position: relative;
@@ -946,18 +946,18 @@ body .markdown-rendered .task-list-item-checkbox {
 
 body .markdown-source-view.mod-cm6 .task-list-item-checkbox:hover,
 body .markdown-rendered .task-list-item-checkbox:hover {
-  border-color: rgb(var(--color-nav));
+  border-color: var(--color-nav);
   box-shadow:
-    0 0 8px rgba(var(--color-nav), 0.6),
-    inset 0 0 4px rgba(var(--color-nav), 0.3);
-  background-color: rgba(var(--color-nav), 0.1);
+    0 0 8px color-mix(in srgb, var(--color-nav) 60%, transparent),
+    inset 0 0 4px color-mix(in srgb, var(--color-nav) 30%, transparent);
+  background-color: color-mix(in srgb, var(--color-nav) 10%, transparent);
 }
 
 body .markdown-source-view.mod-cm6 .task-list-item-checkbox:checked,
 body .markdown-rendered .task-list-item-checkbox:checked {
-  background-color: rgba(var(--color-nav), 0.3);
-  border-color: rgb(var(--color-nav));
-  box-shadow: 0 0 12px rgba(var(--color-nav), 0.8);
+  background-color: color-mix(in srgb, var(--color-nav) 30%, transparent);
+  border-color: var(--color-nav);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--color-nav) 80%, transparent);
 }
 
 body .markdown-source-view.mod-cm6 .task-list-item-checkbox:checked::before,
@@ -970,7 +970,7 @@ body .markdown-rendered .task-list-item-checkbox:checked::before {
   color: #ffffff;
   font-size: 14px;
   font-weight: 900;
-  text-shadow: 0 0 8px rgb(var(--color-nav));
+  text-shadow: 0 0 8px var(--color-nav);
   display: block;
 }
 
@@ -991,7 +991,7 @@ body .markdown-source-view hr {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(var(--color-nav), 0.8) 50%,
+    color-mix(in srgb, var(--color-nav) 80%, transparent) 50%,
     transparent 100%
   );
   margin: 2.5em 0;
@@ -1010,15 +1010,15 @@ body .markdown-source-view hr::after {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(var(--color-nav), 0.3) 50%,
+    color-mix(in srgb, var(--color-nav) 30%, transparent) 50%,
     transparent 100%
   );
   filter: blur(4px);
 }
 
 body .table-view-table thead th {
-  border-bottom: 2px solid rgb(var(--color-nav));
-  color: rgb(var(--color-nav));
+  border-bottom: 2px solid var(--color-nav);
+  color: var(--color-nav);
   font-family: var(--font-headers);
   text-transform: uppercase;
 }
@@ -1042,8 +1042,8 @@ body .workspace-leaf-content[data-type="graph"] .view-content {
 /* 🌟 Explicit font application to ensure stability */
 body .nav-folder-title-content {
   font-family: var(--font-text);
-  color: rgb(var(--color-nav));
-  text-shadow: 0 0 8px rgba(var(--color-nav), 0.5);
+  color: var(--color-nav);
+  text-shadow: 0 0 8px color-mix(in srgb, var(--color-nav) 50%, transparent);
   font-weight: 600;
   transition: all 0.2s ease;
 }
@@ -1058,85 +1058,85 @@ body .nav-file-title-content {
 body .nav-folder-title:hover .nav-folder-title-content,
 body .nav-file-title:hover .nav-file-title-content {
   color: #ffffff;
-  text-shadow: 0 0 12px rgb(var(--color-nav));
+  text-shadow: 0 0 12px var(--color-nav);
 }
 
 body .nav-folder-title:hover,
 body .nav-file-title:hover {
-  background-color: rgba(var(--color-nav), 0.15);
+  background-color: color-mix(in srgb, var(--color-nav) 15%, transparent);
 }
 
 body .nav-folder.is-active > .nav-folder-title,
 body .nav-folder-title.is-active,
 body .nav-file-title.is-active,
 body .nav-file.is-active > .nav-file-title {
-  background-color: rgba(var(--color-nav), 0.2);
-  border-left: 3px solid rgb(var(--color-nav));
-  box-shadow: inset 4px 0 8px rgba(var(--color-nav), 0.2);
+  background-color: color-mix(in srgb, var(--color-nav) 20%, transparent);
+  border-left: 3px solid var(--color-nav);
+  box-shadow: inset 4px 0 8px color-mix(in srgb, var(--color-nav) 20%, transparent);
 }
 
 body .nav-file-title.is-active .nav-file-title-content {
   color: #ffffff;
   text-shadow:
-    0 0 12px rgb(var(--color-nav)),
-    0 0 20px rgb(var(--color-nav));
+    0 0 12px var(--color-nav),
+    0 0 20px var(--color-nav);
   font-weight: 600;
 }
 
 /* Automatic Color Cycle (Rainbow Folders) */
 body .nav-folder-children > .nav-folder:nth-child(11n + 2),
 body .nav-files-container > div > .nav-folder:nth-child(11n + 2) {
-  --color-nav: 243, 139, 168;
+  --color-nav: rgb(243, 139, 168);
 }
 
 body .nav-folder-children > .nav-folder:nth-child(11n + 3),
 body .nav-files-container > div > .nav-folder:nth-child(11n + 3) {
-  --color-nav: 235, 160, 172;
+  --color-nav: rgb(235, 160, 172);
 }
 
 body .nav-folder-children > .nav-folder:nth-child(11n + 4),
 body .nav-files-container > div > .nav-folder:nth-child(11n + 4) {
-  --color-nav: 250, 179, 135;
+  --color-nav: rgb(250, 179, 135);
 }
 
 body .nav-folder-children > .nav-folder:nth-child(11n + 5),
 body .nav-files-container > div > .nav-folder:nth-child(11n + 5) {
-  --color-nav: 249, 226, 175;
+  --color-nav: rgb(249, 226, 175);
 }
 
 body .nav-folder-children > .nav-folder:nth-child(11n + 6),
 body .nav-files-container > div > .nav-folder:nth-child(11n + 6) {
-  --color-nav: 166, 227, 161;
+  --color-nav: rgb(166, 227, 161);
 }
 
 body .nav-folder-children > .nav-folder:nth-child(11n + 7),
 body .nav-files-container > div > .nav-folder:nth-child(11n + 7) {
-  --color-nav: 148, 226, 213;
+  --color-nav: rgb(148, 226, 213);
 }
 
 body .nav-folder-children > .nav-folder:nth-child(11n + 8),
 body .nav-files-container > div > .nav-folder:nth-child(11n + 8) {
-  --color-nav: 137, 220, 235;
+  --color-nav: rgb(137, 220, 235);
 }
 
 body .nav-folder-children > .nav-folder:nth-child(11n + 9),
 body .nav-files-container > div > .nav-folder:nth-child(11n + 9) {
-  --color-nav: 116, 199, 236;
+  --color-nav: rgb(116, 199, 236);
 }
 
 body .nav-folder-children > .nav-folder:nth-child(11n + 10),
 body .nav-files-container > div > .nav-folder:nth-child(11n + 10) {
-  --color-nav: 135, 176, 249;
+  --color-nav: rgb(135, 176, 249);
 }
 
 body .nav-folder-children > .nav-folder:nth-child(11n + 11),
 body .nav-files-container > div > .nav-folder:nth-child(11n + 11) {
-  --color-nav: 180, 190, 254;
+  --color-nav: rgb(180, 190, 254);
 }
 
 body .nav-folder-children > .nav-folder:nth-child(11n + 12),
 body .nav-files-container > div > .nav-folder:nth-child(11n + 12) {
-  --color-nav: 203, 166, 247;
+  --color-nav: rgb(203, 166, 247);
 }
 
 /* =================================================================
@@ -1154,8 +1154,8 @@ body .callout .table-view-table a:hover {
 }
 
 body .markdown-rendered > div > .table-view-table a:hover {
-  color: rgb(var(--color-nav));
-  text-shadow: 0 0 10px rgba(var(--color-nav), 0.5);
+  color: var(--color-nav);
+  text-shadow: 0 0 10px color-mix(in srgb, var(--color-nav) 50%, transparent);
 }
 
 /* =================================================================
@@ -1208,9 +1208,9 @@ body
   .workspace-tab-header-container
   .workspace-tab-header.is-active
   .workspace-tab-header-inner-icon {
-  color: rgb(var(--color-nav));
+  color: var(--color-nav);
   font-weight: 700;
-  text-shadow: 0 0 8px rgba(var(--color-nav), 0.6);
+  text-shadow: 0 0 8px color-mix(in srgb, var(--color-nav) 60%, transparent);
   transition: all 0.3s ease;
 }
 
@@ -1223,14 +1223,14 @@ body
 
 /* 🛠️ ACTIVE TAB "MICA / GLASSMORPHISM" */
 body .workspace-tab-header.is-active {
-  background-color: rgba(var(--color-nav), 0.15);
+  background-color: color-mix(in srgb, var(--color-nav) 15%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(var(--color-nav), 0.4);
+  border: 1px solid color-mix(in srgb, var(--color-nav) 40%, transparent);
   border-bottom: none;
   box-shadow:
-    inset 0 0 20px rgba(var(--color-nav), 0.15),
-    0 -4px 15px rgba(var(--color-nav), 0.1);
+    inset 0 0 20px color-mix(in srgb, var(--color-nav) 15%, transparent),
+    0 -4px 15px color-mix(in srgb, var(--color-nav) 10%, transparent);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
@@ -1262,7 +1262,7 @@ body .workspace-tab-header .workspace-tab-header-inner::after {
 body .workspace-tab-header:not(.is-active) {
   background-color: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(var(--color-nav), 0.3);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-nav) 30%, transparent);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   transition: all 0.3s ease;
@@ -1277,8 +1277,8 @@ body .workspace-tab-header:not(.is-active) .workspace-tab-header-inner-icon {
 }
 
 body .workspace-tab-header:not(.is-active):hover {
-  background-color: rgba(var(--color-nav), 0.08);
-  border-color: rgba(var(--color-nav), 0.2);
+  background-color: color-mix(in srgb, var(--color-nav) 8%, transparent);
+  border-color: color-mix(in srgb, var(--color-nav) 20%, transparent);
 }
 
 body
@@ -1292,17 +1292,17 @@ body
 
 /* 🛠️ APP CLOSE BUTTON (TITLEBAR) */
 body .app-container .titlebar-button.mod-close:hover {
-  background-color: rgba(var(--color-nav), 0.8);
+  background-color: color-mix(in srgb, var(--color-nav) 80%, transparent);
   color: #ffffff;
   box-shadow:
     inset 0 0 10px rgba(255, 255, 255, 0.2),
-    0 0 15px rgba(var(--color-nav), 0.6);
+    0 0 15px color-mix(in srgb, var(--color-nav) 60%, transparent);
   transition: all 0.3s ease;
 }
 
 body .app-container .titlebar-button.mod-close:active {
-  background-color: rgba(var(--color-nav), 1);
-  box-shadow: 0 0 20px rgba(var(--color-nav), 0.9);
+  background-color: color-mix(in srgb, var(--color-nav) 100%, transparent);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--color-nav) 90%, transparent);
 }
 
 /* 🛠️ CALLOUT ICON ALIGNMENT FIX (ORBITRON) */
@@ -1329,7 +1329,7 @@ body .callout[data-callout^="status"] .callout-title-inner,
 body .callout[data-callout^="projects"] .callout-title-inner {
   margin: 0;
   transform: translateY(1px);
-  color: rgb(var(--callout-color));
+  color: var(--callout-color);
 }
 
 body .callout[data-callout^="nav"] .callout-icon::before,
