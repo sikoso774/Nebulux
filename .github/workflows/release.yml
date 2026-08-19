@@ -60,11 +60,27 @@ jobs:
         if: steps.tag_check.outputs.exists == 'false'
         run: |
           VERSION="${{ steps.version.outputs.value }}"
-          awk "/^## \[$VERSION\]/{found=1; next} found && /^## \[/{exit} found{print}" CHANGELOG.md \
-            | sed '/^[[:space:]]*$/d' > release_notes.md
-          if [ ! -s release_notes.md ]; then
-            echo "Release $VERSION" > release_notes.md
-          fi
+          python3 - "$VERSION" <<'PY'
+          import re, sys
+
+          version = sys.argv[1]
+          text = open('CHANGELOG.md', encoding='utf-8').read()
+
+          # everything between this version's heading and the next one
+          match = re.search(
+              r'^## \[' + re.escape(version) + r'\].*?$(.*?)(?=^## \[|\Z)',
+              text, re.M | re.S)
+
+          notes = match.group(1) if match else ''
+          # drop the trailing horizontal rule that separates versions, but keep
+          # every blank line inside: tables and code fences need them to render.
+          notes = re.sub(r'\n+-{3,}[ \t]*\n*\Z', '', notes).strip()
+
+          # written straight to the file in UTF-8: piping through stdout would
+          # depend on the runner locale, and the changelog headings use emoji.
+          with open('release_notes.md', 'w', encoding='utf-8') as f:
+              f.write(notes or f'Release {version}')
+          PY
           echo "--- Release notes ---"
           cat release_notes.md
 
