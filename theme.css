@@ -185,10 +185,10 @@ settings:
 
 :root {
   /* --- SMART STYLE SETTINGS CONNECTION --- */
-  --color-nav: var(--theme-nav-rgb, 120, 180, 255);
-  --color-status: var(--theme-status-rgb, 255, 200, 50);
-  --color-projects: var(--theme-projects-rgb, 205, 127, 50);
-  --color-cross: 255, 255, 255;
+  --color-nav: var(--theme-nav, #78b4ff);
+  --color-status: var(--theme-status, #ffc832);
+  --color-projects: var(--theme-projects, #cd7f32);
+  --color-cross: #ffffff;
 
   --bg-gradient-center: #1a253a;
   --bg-gradient-edge: #050505;
@@ -462,7 +462,7 @@ body .cm-header-6 {
 body strong,
 body b,
 body .cm-strong {
-  color: rgb(var(--color-projects));
+  color: var(--color-projects);
   font-weight: 700;
 }
 
@@ -549,11 +549,11 @@ body .menu-item:hover {
    3. MODULES: CALLOUTS & DASHBOARD
    ================================================================= */
 body .callout {
-  border: 1px solid rgba(var(--hud-color, 160, 190, 220), 0.5);
+  border: 1px solid color-mix(in srgb, var(--hud-color, #a0bedc) 50%, transparent);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
   background: color-mix(
     in srgb,
-    rgb(var(--hud-color)) 15%,
+    var(--hud-color) 15%,
     rgba(10, 12, 18, 0.85)
   );
   border-radius: 12px;
@@ -563,13 +563,13 @@ body .callout {
 
 body .callout:hover {
   transform: translateY(-3px);
-  border-color: rgb(var(--hud-color, 160, 190, 220));
+  border-color: var(--hud-color, #a0bedc);
   box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.8),
-    0 0 15px rgba(var(--hud-color, 160, 190, 220), 0.3);
+    0 0 15px color-mix(in srgb, var(--hud-color, #a0bedc) 30%, transparent);
   background: color-mix(
     in srgb,
-    rgb(var(--hud-color)) 25%,
+    var(--hud-color) 25%,
     rgba(10, 12, 18, 0.95)
   );
 }
@@ -613,7 +613,7 @@ body .callout[data-callout^="projects"] .callout-icon::before {
   display: block;
   width: 1.2em;
   height: 1.2em;
-  background-color: rgb(var(--hud-color));
+  background-color: var(--hud-color);
   -webkit-mask-image: var(--hud-icon);
   mask-image: var(--hud-icon);
   -webkit-mask-size: contain;
@@ -706,17 +706,17 @@ body
 /* Colorized Native Obsidian Callouts */
 body .callout[data-callout="info"],
 body .callout[data-callout="todo"] {
-  --hud-color: 80, 160, 255;
+  --hud-color: rgb(80, 160, 255);
 }
 
 body .callout[data-callout="example"] {
-  --hud-color: 180, 120, 255;
+  --hud-color: rgb(180, 120, 255);
 }
 
 body .callout[data-callout="success"],
 body .callout[data-callout="check"],
 body .callout[data-callout="done"] {
-  --hud-color: 80, 220, 120;
+  --hud-color: rgb(80, 220, 120);
 }
 
 body .callout[data-callout="warning"],
@@ -725,7 +725,7 @@ body .callout[data-callout="help"],
 body .callout[data-callout="faq"],
 body .callout[data-callout="caution"],
 body .callout[data-callout="attention"] {
-  --hud-color: 255, 170, 50;
+  --hud-color: rgb(255, 170, 50);
 }
 
 body .callout[data-callout="danger"],
@@ -733,7 +733,7 @@ body .callout[data-callout="error"],
 body .callout[data-callout="fail"],
 body .callout[data-callout="failure"],
 body .callout[data-callout="bug"] {
-  --hud-color: 255, 80, 80;
+  --hud-color: rgb(255, 80, 80);
 }
 
 body .callout[data-callout="tip"],
@@ -742,12 +742,12 @@ body .callout[data-callout="abstract"],
 body .callout[data-callout="summary"],
 body .callout[data-callout="tldr"],
 body .callout[data-callout="hint"] {
-  --hud-color: 50, 220, 255;
+  --hud-color: rgb(50, 220, 255);
 }
 
 body .callout[data-callout="quote"],
 body .callout[data-callout="cite"] {
-  --hud-color: 150, 160, 170;
+  --hud-color: rgb(150, 160, 170);
 }
 
 /* Dashboard Menu Flexbox */
@@ -900,7 +900,7 @@ body .metadata-property .multi-select-pill {
 }
 
 body .multi-select-pill-remove-button {
-  color: rgb(var(--color-cross));
+  color: var(--color-cross);
 }
 
 /* Toggles Settings */
@@ -1147,10 +1147,10 @@ body .table-view-table a {
 }
 
 body .callout .table-view-table a:hover {
-  color: rgb(var(--hud-color));
-  text-shadow: 0 0 10px rgba(var(--hud-color), 0.8);
+  color: var(--hud-color);
+  text-shadow: 0 0 10px color-mix(in srgb, var(--hud-color) 80%, transparent);
   text-decoration-line: underline;
-  text-decoration-color: rgb(var(--hud-color));
+  text-decoration-color: var(--hud-color);
 }
 
 body .markdown-rendered > div > .table-view-table a:hover {
