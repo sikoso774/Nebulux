@@ -5,8 +5,8 @@
 <br>
 <div>
   <p>
-    <img src="https://img.shields.io/github/v/release/Sikoso774/Nebulux?color=0e131f" alt="Release">
-    <img src="https://img.shields.io/github/release-date/Sikoso774/Nebulux?color=78B4FF" alt="Release Date">
+    <img src="https://img.shields.io/github/v/release/sikoso774/Nebulux?color=0e131f" alt="Release">
+    <img src="https://img.shields.io/github/release-date/sikoso774/Nebulux?color=78B4FF" alt="Release Date">
     <img src="https://img.shields.io/badge/License-MIT-A31F34" alt="License">
     <img src="https://img.shields.io/badge/Downloads-88-7c3aed?logo=obsidian&logoColor=white" alt="Obsidian Downloads">
   </p>
@@ -161,4 +161,4 @@ Thank you for paving the way and making the Obsidian customization scene so amaz
 *💡 Tip: To fully enjoy the Glassmorphism effect on the top bar, it is highly recommended to enable the "Hidden window frame" option in Obsidian's Appearance settings.*
 
 ---
-*Created with 🩷 by [@Sikoso774](https://github.com/Sikoso774)*
+*Created with 🩷 by [@sikoso774](https://github.com/sikoso774)*

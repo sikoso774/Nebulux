@@ -203,4 +203,4 @@ Very first official release of **Nebulux** (formerly Galaxy Theme), marking a ma
 ### 📦 How to install
 Since this is the initial release, users can download the `theme.css` and `manifest.json` from the assets below, or install it directly via the Obsidian Community Themes gallery once approved.
 
-*Designed & Coded with ✨ by [@Sikoso774](https://github.com/Sikoso774)*
+*Designed & Coded with ✨ by [@sikoso774](https://github.com/sikoso774)*
