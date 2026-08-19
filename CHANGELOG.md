@@ -4,6 +4,57 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.1.8] - 2026-08-19 — Obsidian 1.13 Color Variable Migration
+
+A compatibility release for Obsidian 1.13, which changed how `--callout-color` is exposed. Left unfixed, the theme rendered most of its accent colors as plain white.
+
+Reported and initially fixed by [@saberzero1](https://github.com/saberzero1) in [#1](https://github.com/sikoso774/Nebulux/pull/1), as part of a proactive community review pass ahead of the release.
+
+### 🛠️ Fixed — `--callout-color` is now a full color value
+
+Obsidian 1.13 provides `--callout-color` as a valid CSS color (`rgb(255, 0, 128)`) instead of a bare RGB triplet (`255, 0, 128`). Two patterns broke as a result:
+
+| Before (1.12 and earlier)         | After (1.13+)                                          |
+| --------------------------------- | ------------------------------------------------------ |
+| `--callout-color: 255, 0, 128;`   | `--callout-color: rgb(255, 0, 128);`                   |
+| `rgb(var(--callout-color))`       | `var(--callout-color)`                                 |
+| `rgba(var(--callout-color), 0.1)` | `color-mix(in srgb, var(--callout-color) 10%, transparent)` |
+
+Wrapping the new value in `rgb()` produces `rgb(rgb(...))` — invalid at computed-value time, so the whole declaration is dropped.
+
+### 🛠️ Fixed — Root color variables feeding the callout chain
+
+Nebulux never sets `--callout-color` from a literal. It routes every accent through three hops:
+
+```
+--theme-nav-rgb  →  --color-nav  →  --hud-color  →  --callout-color
+```
+
+Converting only the last hop left the source values as bare triplets, so `color: var(--color-nav)` resolved to `color: 120, 180, 255` and was discarded. The `:root` definitions now hold full colors, reading the hex variable Style Settings exposes (`--theme-nav`) rather than its triplet companion (`--theme-nav-rgb`):
+
+```css
+--color-nav: var(--theme-nav, #78b4ff);
+--color-status: var(--theme-status, #ffc832);
+--color-projects: var(--theme-projects, #cd7f32);
+--color-cross: #ffffff;
+```
+
+Symptoms this resolves: rainbow folder colors, tags, callout titles, task checkboxes, `<hr>` separators and table headers all rendering white.
+
+### 🛠️ Fixed — `--hud-color` migrated alongside
+
+`--hud-color` receives the same values (`--hud-color: var(--color-nav)`) and drives the native Obsidian callouts. Its 7 triplet definitions are now wrapped in `rgb()`, and its 6 consumers moved to `var()` / `color-mix()`. Without this, fixing the root variables alone would have broken every built-in callout — `info`, `warning`, `danger`, `quote` and the rest — instead of the custom ones.
+
+Two isolated consumers were migrated as well: `rgb(var(--color-projects))` on bold text, and `rgb(var(--color-cross))` on metadata pill remove buttons.
+
+No `rgb(var(...))` or `rgba(var(...))` construct remains in `theme.css`.
+
+### ⬆️ Changed — `minAppVersion` raised to `1.13.0`
+
+The migrated syntax depends on 1.13's color semantics, so the theme now declares 1.13.0 as its floor. Users on earlier versions should stay on 1.1.7.
+
+---
+
 ## [1.1.7] - 2026-05-29 — WCAG Contrast Compliance & Inline Title
 
 A targeted accessibility patch raising contrast ratios across the theme to meet WCAG AA/AAA standards, validated at 12.85:1 on the theme screenshot.
