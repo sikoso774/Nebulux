@@ -345,17 +345,65 @@ body .cm-header-6 {
   font-weight: 700;
 }
 
-/* Emoji in editor-mode gradient headers (cm-emoji spans) */
-body .cm-header-1 .cm-emoji,
-body .cm-header-2 .cm-emoji,
-body .cm-header-3 .cm-emoji,
-body .cm-header-4 .cm-emoji,
-body .cm-header-5 .cm-emoji,
-body .cm-header-6 .cm-emoji {
-  -webkit-background-clip: unset;
-  background-clip: unset;
+/* Emoji in editor-mode gradient headers.
+   background-clip: text turns an emoji into a gradient-filled silhouette (a blob).
+   In Live Preview, Iconize wraps each emoji in a widget that sits outside .cm-header-N,
+   so it keeps its colors. But Iconize drops that widget on the cursor line (to leave the
+   raw text editable) and in Source mode, and the raw emoji then falls inside the clip.
+   There, use the solid gradient start color instead: opaque text paints emoji in color. */
+body .markdown-source-view:not(.is-live-preview) .cm-header-1,
+body .markdown-source-view .cm-line.cm-active .cm-header-1 {
   background-image: none;
-  color: var(--text-normal);
+  color: var(--h1-start);
+}
+body .markdown-source-view:not(.is-live-preview) .cm-header-2,
+body .markdown-source-view .cm-line.cm-active .cm-header-2 {
+  background-image: none;
+  color: var(--h2-start);
+}
+body .markdown-source-view:not(.is-live-preview) .cm-header-3,
+body .markdown-source-view .cm-line.cm-active .cm-header-3 {
+  background-image: none;
+  color: var(--h3-start);
+}
+body .markdown-source-view:not(.is-live-preview) .cm-header-4,
+body .markdown-source-view .cm-line.cm-active .cm-header-4 {
+  background-image: none;
+  color: var(--h4-start);
+}
+body .markdown-source-view:not(.is-live-preview) .cm-header-5,
+body .markdown-source-view .cm-line.cm-active .cm-header-5 {
+  background-image: none;
+  color: var(--h5-start);
+}
+body .markdown-source-view:not(.is-live-preview) .cm-header-6,
+body .markdown-source-view .cm-line.cm-active .cm-header-6 {
+  background-image: none;
+  color: var(--h6-start);
+}
+
+/* Emoji in reading-view gradient headers.
+   Obsidian doesn't wrap emoji in an element, and background-clip: text turns any
+   glyph into a gradient-filled silhouette (a white blob). ::first-letter catches a
+   leading emoji; an opaque color paints it in its own colors on top of the clip.
+   The color is the gradient start, so a heading without emoji looks unchanged. */
+body .markdown-rendered h1::first-letter {
+  color: var(--h1-start);
+}
+body .markdown-rendered h2::first-letter {
+  color: var(--h2-start);
+}
+body .markdown-rendered h3::first-letter {
+  color: var(--h3-start);
+}
+body .markdown-rendered h4::first-letter {
+  color: var(--h4-start);
+}
+body .markdown-rendered h5::first-letter {
+  color: var(--h5-start);
+}
+body .markdown-rendered h6::first-letter {
+  color: var(--h6-start);
 }
 
 /* Fix: Iconize SVG icons in gradient headers — inherit color: transparent breaks currentColor */
