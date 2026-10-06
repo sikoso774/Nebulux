@@ -8,7 +8,7 @@
     <img src="https://img.shields.io/github/v/release/sikoso774/Nebulux?color=0e131f" alt="Release">
     <img src="https://img.shields.io/github/release-date/sikoso774/Nebulux?color=78B4FF" alt="Release Date">
     <img src="https://img.shields.io/badge/License-MIT-A31F34" alt="License">
-    <img src="https://img.shields.io/badge/Downloads-88-7c3aed?logo=obsidian&logoColor=white" alt="Obsidian Downloads">
+    <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Freleases.obsidian.md%2Fstats%2Ftheme&query=%24%5B%22Nebulux%22%5D.download&label=Downloads&color=7c3aed&logo=obsidian&logoColor=white" alt="Obsidian Downloads">
   </p>
 </div>
 
