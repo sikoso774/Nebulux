@@ -4,6 +4,61 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.2.0] - 2026-10-06 — Obsidian 1.14 Highlight Colors
+
+Obsidian 1.14 adds six highlight colors (`==🔴 text==`). Until now Nebulux painted every highlight in the same violet and ignored the color. This release gives each color its own neon look and exposes the palette in Style Settings. It also ships the heading emoji fix, which had been merged but never released.
+
+Requires Obsidian 1.14.0 or later. Users on earlier versions stay on 1.1.8.
+
+### ✨ Added — Six highlight colors
+
+Add a color emoji (🔴 🟠 🟡 🟢 🔵 🟣) at the start of a highlight, or pick one from the format menu. Each color gets the Nebulux treatment: a 35 % translucent fill, a luminous halo of the same hue, white bold text and rounded corners. Reading view, Live Preview and Source mode are all covered, and the `==` markers take the hue of their highlight.
+
+| Color     | Default   |
+| --------- | --------- |
+| 🔴 Red    | `#ff5c6c` |
+| 🟠 Orange | `#ff9f43` |
+| 🟡 Yellow | `#ffd84a` |
+| 🟢 Green  | `#4fdc8a` |
+| 🔵 Blue   | `#5aa9ff` |
+| 🟣 Purple | `#8f5bff` |
+
+In Live Preview, the swatch that replaces the emoji while the cursor is inside a highlight is a neon dot with a halo.
+
+Contrast stays within WCAG AA: white text on each 35 % fill measures at least 5.25:1 over the theme's surfaces. The worst case is yellow on `#243350`.
+
+### 🎨 Added — Highlights group in Style Settings
+
+A new **🖍️ Highlights** group exposes the six colors, the plain highlight color and a glow intensity slider (0–100 %, default 50 %). That is nine new entries in total.
+
+The palette is declared on `body`, not on `:root`: Style Settings writes its values on `body`, which `:root` cannot read.
+
+### 🎨 Changed — Plain highlight is now Nebula Pink
+
+A plain `==text==` goes from violet (`#b784e6`) to Nebula Pink (`#ff6ad5`). The old violet sat too close to 🟣 once the six colors existed. Existing highlights change color. To get the old value back, set Style Settings → Highlights → Plain Highlight to `#b784e6`.
+
+### 🛠️ Fixed — Highlights ignored their color
+
+Section 8 hard-coded `rgba(183, 132, 230, …)` as the background and halo of `mark` (reading view) and `.cm-highlight` (editor). Obsidian expresses a highlight's color through `mark[data-highlight="red"]` and `.cm-highlight-red`, and only sets `--highlight-background` there. The theme's fixed background always won, so all six colors rendered in the same violet.
+
+Fill, halo, markers and swatch now derive from a single `--hl-color`, set per color from those same attributes and classes. A colored highlight starts with the space that follows its emoji, which the editor does not collapse, so its left padding is dropped to keep the pill balanced.
+
+Search matches inside a note and the flash shown when jumping to a link keep Obsidian's own highlight color.
+
+### 🛠️ Fixed — Heading emoji rendered as a silhouette
+
+Headings are painted with `background-clip: text` and `color: transparent`. That technique uses the text as a mask, so any color glyph becomes a flat silhouette filled by the gradient. An emoji in a heading showed as a blob in reading view, on the cursor line in Live Preview, and on every heading in Source mode.
+
+Reading view now paints a leading emoji in its own colors. The cursor line and Source mode use the solid start color of the heading's gradient instead of the gradient itself. Fixed in [#2](https://github.com/sikoso774/Nebulux/pull/2).
+
+Two trade-offs remain. An emoji in the middle of a heading still renders as a silhouette in reading view, because CSS alone cannot isolate it. The gradient stays on inactive Live Preview lines but is replaced by the solid color on the line being edited.
+
+### ⬆️ Changed — `minAppVersion` raised to `1.14.0`
+
+Highlight colors are a 1.14 feature and the headline of this release, so the theme now declares 1.14.0 as its floor. Users on earlier versions stay on 1.1.8, which does not include the heading emoji fix either.
+
+---
+
 ## [1.1.8] - 2026-08-19 — Obsidian 1.13 Color Variable Migration
 
 A compatibility release for Obsidian 1.13, which changed how `--callout-color` is exposed. Left unfixed, the theme rendered most of its accent colors as plain white.
