@@ -166,6 +166,62 @@ settings:
         type: variable-color
         format: hex
         default: '#789ab5'
+    -
+        id: highlights-title
+        title: 🖍️ Highlights (Obsidian 1.14+)
+        type: heading
+        level: 1
+    -
+        id: theme-hl-default
+        title: ⚪ Plain Highlight (Nebula Pink)
+        type: variable-color
+        format: hex
+        default: '#ff6ad5'
+    -
+        id: theme-hl-red
+        title: 🔴 Red Highlight
+        type: variable-color
+        format: hex
+        default: '#ff5c6c'
+    -
+        id: theme-hl-orange
+        title: 🟠 Orange Highlight
+        type: variable-color
+        format: hex
+        default: '#ff9f43'
+    -
+        id: theme-hl-yellow
+        title: 🟡 Yellow Highlight
+        type: variable-color
+        format: hex
+        default: '#ffd84a'
+    -
+        id: theme-hl-green
+        title: 🟢 Green Highlight
+        type: variable-color
+        format: hex
+        default: '#4fdc8a'
+    -
+        id: theme-hl-blue
+        title: 🔵 Blue Highlight
+        type: variable-color
+        format: hex
+        default: '#5aa9ff'
+    -
+        id: theme-hl-purple
+        title: 🟣 Purple Highlight (Deep Violet)
+        type: variable-color
+        format: hex
+        default: '#8f5bff'
+    -
+        id: theme-hl-glow
+        title: ✨ Highlight Glow Intensity
+        type: variable-number-slider
+        default: 50
+        min: 0
+        max: 100
+        step: 5
+        format: '%'
 */
 
 /* ============================================================
@@ -1208,35 +1264,134 @@ body .markdown-rendered > div > .table-view-table a:hover {
 
 /* =================================================================
    8. HIGHLIGHTS - NEBULA EFFECT
+   Obsidian 1.14 adds six highlight colors (==🔴 text==). Reading view
+   tags them mark[data-highlight="red|orange|yellow|green|blue|purple"],
+   the editor adds .cm-highlight-<color>. A plain ==text== keeps the
+   nebula pink. Fill, halo, == tags and swatch all derive from one
+   variable, --hl-color, so they always share the same hue.
    ================================================================= */
+
+/* Palette. Declared on body, not :root: Style Settings writes its
+   --theme-* values on body, which :root cannot see. Each entry is a
+   complete color (see CONTRIBUTING: color variable contract). */
+body {
+  --hl-default: var(--theme-hl-default, #ff6ad5);
+  --hl-red: var(--theme-hl-red, #ff5c6c);
+  --hl-orange: var(--theme-hl-orange, #ff9f43);
+  --hl-yellow: var(--theme-hl-yellow, #ffd84a);
+  --hl-green: var(--theme-hl-green, #4fdc8a);
+  --hl-blue: var(--theme-hl-blue, #5aa9ff);
+  --hl-purple: var(--theme-hl-purple, #8f5bff);
+  --hl-glow: var(--theme-hl-glow, 50%);
+}
+
+/* Highlight color: plain ==text== first, then each of the six colors.
+   The color rules are more specific, so order does not matter. */
+body .markdown-rendered mark,
+body .markdown-source-view.mod-cm6 .cm-highlight {
+  --hl-color: var(--hl-default);
+}
+
+body .markdown-rendered mark[data-highlight="red"],
+body .markdown-source-view.mod-cm6 .cm-highlight.cm-highlight-red,
+body .highlight-swatch[data-highlight="red"] {
+  --hl-color: var(--hl-red);
+}
+
+body .markdown-rendered mark[data-highlight="orange"],
+body .markdown-source-view.mod-cm6 .cm-highlight.cm-highlight-orange,
+body .highlight-swatch[data-highlight="orange"] {
+  --hl-color: var(--hl-orange);
+}
+
+body .markdown-rendered mark[data-highlight="yellow"],
+body .markdown-source-view.mod-cm6 .cm-highlight.cm-highlight-yellow,
+body .highlight-swatch[data-highlight="yellow"] {
+  --hl-color: var(--hl-yellow);
+}
+
+body .markdown-rendered mark[data-highlight="green"],
+body .markdown-source-view.mod-cm6 .cm-highlight.cm-highlight-green,
+body .highlight-swatch[data-highlight="green"] {
+  --hl-color: var(--hl-green);
+}
+
+body .markdown-rendered mark[data-highlight="blue"],
+body .markdown-source-view.mod-cm6 .cm-highlight.cm-highlight-blue,
+body .highlight-swatch[data-highlight="blue"] {
+  --hl-color: var(--hl-blue);
+}
+
+body .markdown-rendered mark[data-highlight="purple"],
+body .markdown-source-view.mod-cm6 .cm-highlight.cm-highlight-purple,
+body .highlight-swatch[data-highlight="purple"] {
+  --hl-color: var(--hl-purple);
+}
 
 /* Reading Mode */
 body .markdown-rendered mark {
-  background-color: rgba(183, 132, 230, 0.35);
-  /* Translucent Nebula Purple */
+  background-color: color-mix(in srgb, var(--hl-color) 35%, transparent);
+  /* Translucent fill */
   color: #ffffff;
   padding: 2px 6px;
   border-radius: 6px;
-  box-shadow: 0 0 10px rgba(183, 132, 230, 0.5);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--hl-color) var(--hl-glow), transparent);
   /* Luminous halo */
   font-weight: 600;
 }
 
 /* Editor Mode (Live Preview) */
 body .markdown-source-view.mod-cm6 .cm-highlight {
-  background-color: rgba(183, 132, 230, 0.35);
+  background-color: color-mix(in srgb, var(--hl-color) 35%, transparent);
   color: #ffffff;
   padding: 2px 4px;
   border-radius: 6px;
-  box-shadow: 0 0 10px rgba(183, 132, 230, 0.5);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--hl-color) var(--hl-glow), transparent);
   font-weight: 600;
+}
+
+/* A colored highlight starts with a space (the one after the emoji), which the
+   editor does not collapse: drop the left padding so the pill stays balanced */
+body .markdown-source-view.mod-cm6 .cm-highlight.cm-highlight-red,
+body .markdown-source-view.mod-cm6 .cm-highlight.cm-highlight-orange,
+body .markdown-source-view.mod-cm6 .cm-highlight.cm-highlight-yellow,
+body .markdown-source-view.mod-cm6 .cm-highlight.cm-highlight-green,
+body .markdown-source-view.mod-cm6 .cm-highlight.cm-highlight-blue,
+body .markdown-source-view.mod-cm6 .cm-highlight.cm-highlight-purple {
+  padding-inline-start: 0;
 }
 
 /* The == tags themselves in the editor (to make them discreet) */
 body .markdown-source-view.mod-cm6 .cm-formatting-highlight {
-  color: rgba(183, 132, 230, 0.5);
+  color: color-mix(in srgb, var(--hl-color) 50%, transparent);
   background-color: transparent;
   box-shadow: none;
+}
+
+/* Color swatches follow the palette everywhere (editor, format menu, the
+   suggestions shown after typing ==) instead of Obsidian's own colors */
+body .highlight-swatch[data-highlight] {
+  background-color: var(--hl-color);
+}
+
+/* Live Preview swatch, shown in place of the emoji while the cursor is inside
+   a highlight: a neon dot with a halo, no flat tile behind it */
+body .markdown-source-view.mod-cm6 .cm-highlight-color-widget {
+  background-color: transparent;
+}
+
+body .markdown-source-view.mod-cm6 .cm-highlight-color-widget .highlight-swatch {
+  box-shadow:
+    0 0 6px color-mix(in srgb, var(--hl-color) 80%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, #ffffff 35%, transparent);
+}
+
+@media (hover: hover) {
+  body .markdown-source-view.mod-cm6 .cm-highlight-color-widget .highlight-swatch:hover {
+    box-shadow:
+      0 0 10px var(--hl-color),
+      inset 0 0 0 1px color-mix(in srgb, #ffffff 65%, transparent);
+  }
 }
 
 /* =================================================================
