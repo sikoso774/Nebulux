@@ -607,8 +607,10 @@ body .app-container .status-bar {
   border-top: var(--hud-frame) solid color-mix(in srgb, var(--color-nav) 50%, transparent);
 }
 
-body button:not(.excalidraw-wrapper *):not(.canvas-wrapper *),
-body button.mod-cta:not(.excalidraw-wrapper *):not(.canvas-wrapper *) {
+/* Excalidraw renders its menus and color pickers in portals appended to
+   <body> (div.excalidraw outside .excalidraw-wrapper): exclude both. */
+body button:not(.excalidraw-wrapper *):not(.excalidraw *):not(.canvas-wrapper *),
+body button.mod-cta:not(.excalidraw-wrapper *):not(.excalidraw *):not(.canvas-wrapper *) {
   background-color: rgba(15, 25, 45, 0.9);
   border: 1px solid color-mix(in srgb, var(--color-nav) 50%, transparent);
   color: #e0e6ed;
@@ -616,12 +618,22 @@ body button.mod-cta:not(.excalidraw-wrapper *):not(.canvas-wrapper *) {
   transition: all 0.3s ease;
 }
 
-body button:not(.excalidraw-wrapper *):not(.canvas-wrapper *):hover {
+body button:not(.excalidraw-wrapper *):not(.excalidraw *):not(.canvas-wrapper *):hover {
   background-color: color-mix(in srgb, var(--color-nav) 15%, transparent);
   box-shadow: 0 0 15px color-mix(in srgb, var(--color-nav) 60%, transparent);
   border-color: var(--color-nav);
   transform: translateY(-2px);
   color: #ffffff;
+}
+
+/* Excalidraw menus: its hover rule uses var(--button-hover), which it never
+   defines, so hovered items get no background. Give them the Nebulux menu look. */
+body .excalidraw {
+  --button-hover: color-mix(in srgb, var(--color-nav) 20%, transparent);
+}
+
+body .excalidraw .dropdown-menu .dropdown-menu-item:hover {
+  box-shadow: inset 3px 0 0 var(--color-nav);
 }
 
 body .menu,
