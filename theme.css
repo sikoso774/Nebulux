@@ -636,6 +636,26 @@ body .excalidraw .dropdown-menu .dropdown-menu-item:hover {
   box-shadow: inset 3px 0 0 var(--color-nav);
 }
 
+/* Excalidraw only outlines LIGHT color swatches (.has-outline): it assumes a
+   light UI when a drawing uses its light theme, but Nebulux paints the menus
+   dark, so dark swatches vanish — and so does the "more colors" trigger, which
+   shows the current color. Ring every swatch; make the trigger a neon ring. */
+body .excalidraw .color-picker__button:not(.color-picker__button--no-focus-visible) {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-nav) 35%, transparent);
+}
+
+body .excalidraw .color-picker__button.active-color {
+  box-shadow:
+    0 0 0 1.5px var(--color-nav),
+    0 0 8px color-mix(in srgb, var(--color-nav) 45%, transparent);
+}
+
+body .excalidraw .color-picker__button.active-color:hover {
+  box-shadow:
+    0 0 0 2px var(--color-nav),
+    0 0 14px color-mix(in srgb, var(--color-nav) 70%, transparent);
+}
+
 body .menu,
 body .suggestion-container {
   background-color: #0f192d;
