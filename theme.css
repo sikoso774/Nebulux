@@ -656,6 +656,32 @@ body .excalidraw .color-picker__button.active-color:hover {
     0 0 14px color-mix(in srgb, var(--color-nav) 70%, transparent);
 }
 
+/* Excalidraw welcome screen (empty canvas): in a light-theme drawing it keeps
+   its dark-on-light greys (#898989 titles, dark hover text) over the dark
+   Nebulux canvas, so the sentences are dim and the hovered link disappears.
+   The rank title sets its color inline as var(--color-gray-40): redefine that
+   variable on the element itself rather than fighting the inline style. */
+body .excalidraw .welcome-screen-decor {
+  --color-gray-40: color-mix(in srgb, var(--color-nav) 18%, #e0e6ed);
+  color: var(--color-gray-40);
+}
+
+body .excalidraw .welcome-screen-menu-item,
+body .excalidraw .welcome-screen-menu-item__shortcut {
+  color: #d6dbe4;
+}
+
+body .excalidraw .welcome-screen-menu-item:hover {
+  background-color: var(--button-hover);
+  box-shadow: inset 3px 0 0 var(--color-nav);
+}
+
+body .excalidraw .welcome-screen-menu-item:hover .welcome-screen-menu-item__icon,
+body .excalidraw .welcome-screen-menu-item:hover .welcome-screen-menu-item__shortcut,
+body .excalidraw .welcome-screen-menu-item:hover .welcome-screen-menu-item__text {
+  color: #ffffff;
+}
+
 body .menu,
 body .suggestion-container {
   background-color: #0f192d;
