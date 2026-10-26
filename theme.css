@@ -682,6 +682,15 @@ body .excalidraw .welcome-screen-menu-item:hover .welcome-screen-menu-item__text
   color: #ffffff;
 }
 
+/* Excalidraw library panel: item thumbnails are drawn with black strokes and
+   Excalidraw only inverts them in its own dark theme (--theme-filter). A
+   light-theme drawing (excalidraw-export-dark: false) keeps them black, but
+   Nebulux paints the panel dark, so the symbols are almost invisible. Apply
+   the same filter Excalidraw uses in dark mode. */
+body .excalidraw:not(.theme--dark) .library-unit__dragger svg {
+  filter: invert(93%) hue-rotate(180deg);
+}
+
 body .menu,
 body .suggestion-container {
   background-color: #0f192d;
